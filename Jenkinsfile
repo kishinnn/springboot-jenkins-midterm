@@ -2,7 +2,6 @@ pipeline {
     agent any
     
     tools {
-        // This tells Jenkins to use a Maven installation it already has
         maven 'Maven 3' 
     }
 
@@ -14,16 +13,18 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'Building the fat jar artifact...'
-                // Using 'mvn' directly instead of './mvnw'
-                sh 'mvn clean package' 
+                // Change 'midterm-springboot' to the exact name of your project folder
+                dir('midterm-springboot') { 
+                    echo 'Building the fat jar artifact...'
+                    sh 'mvn clean package' 
+                }
             }
         }
     }
     post {
         always {
-            // This captures the .jar file for your screenshot requirement
-            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            // Updated path to find the jar inside the subfolder
+            archiveArtifacts artifacts: 'midterm-springboot/target/*.jar', fingerprint: true
         }
     }
 }
