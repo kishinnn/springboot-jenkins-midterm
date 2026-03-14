@@ -20,8 +20,9 @@ pipeline {
     }
     post {
         always {
-            // Updated path to find the jar inside the subfolder
-            archiveArtifacts artifacts: 'midterm-springboot/target/*.jar', fingerprint: true
+            // Update this line to match where Jenkins found the file
+            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
-    }
+    }    
+
 }
