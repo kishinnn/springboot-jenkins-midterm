@@ -13,11 +13,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                // Change 'midterm-springboot' to the exact name of your project folder
-                dir('midterm-springboot') { 
-                    echo 'Building the fat jar artifact...'
-                    sh 'mvn clean package' 
-                }
+                echo 'Building the fat jar artifact...'
+        	sh 'mvn clean package'
             }
         }
     }
