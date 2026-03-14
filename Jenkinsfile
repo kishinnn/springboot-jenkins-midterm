@@ -20,9 +20,9 @@ pipeline {
     }
     post {
         always {
-            // Update this line to match where Jenkins found the file
+            // Jenkins confirmed the file is here: /var/jenkins_home/workspace/Midterm314/target/
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
-    }    
+    }   
 
 }
