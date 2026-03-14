@@ -1,25 +1,28 @@
 pipeline {
-    agent any // This allows the build to run on any available Jenkins agent
+    agent any
+    
+    tools {
+        // This tells Jenkins to use a Maven installation it already has
+        maven 'Maven 3' 
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                // This pulls your code from the GitHub repository you configured
-                checkout scm 
+                checkout scm
             }
         }
         stage('Build') {
             steps {
-                echo 'Building the fat jar...'
-                // This command uses the Maven wrapper to package your Java project
-                // It creates the .jar file required for your midterm
-                sh './mvnw clean package' 
+                echo 'Building the fat jar artifact...'
+                // Using 'mvn' directly instead of './mvnw'
+                sh 'mvn clean package' 
             }
         }
     }
     post {
-        success {
-            // This archives the resulting jar file so you can see it in Jenkins
+        always {
+            // This captures the .jar file for your screenshot requirement
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
